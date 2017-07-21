@@ -19,7 +19,7 @@ The SDK has dependencies to the APIUtilityGoSDK which contains common heplers fo
 
 ## Usage
 
-See the Godocs: https://golang.org/pkg/github.com/publitsweden/ProductionAPIGoSDK for more information about implementation, examples and usage.
+See the Godocs: https://godoc.org/pkg/github.com/publitsweden/ProductionAPIGoSDK for more information about implementation, examples and usage.
 
 **Simple example**
 ```Go
