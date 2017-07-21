@@ -1,3 +1,6 @@
+[![GoDoc](https://godoc.org/github.com/publitsweden/ProductionAPIGoSDK?status.svg)](https://godoc.org/github.com/publitsweden/ProductionAPIGoSDK)
+
+
 # Publit Production API SDK for GO
 
 ProductionAPIGoSDK is the official Go SDK for the Publit production API.
