@@ -391,16 +391,36 @@ func TestCanMakeResponseError(t *testing.T) {
 		},
 	)
 	t.Run(
-		"Error should be made even if no body to parse",
+		"Unauthorized error without body",
+		func(t *testing.T) {
+			errorMessage := []byte(`{}`)
+
+			resp := &http.Response{
+				Status:     "401 Unauthorized",
+				StatusCode: http.StatusUnauthorized,
+				Body: ioutil.NopCloser(bytes.NewBuffer(errorMessage)),
+			}
+
+			e := MakeResponseError(resp)
+
+			if e == nil {
+				t.Error("No error recieved but was expecting one.")
+			}
+
+			expected := `Unauthorized. Code: "401"`
+			if e.Error() != expected {
+				t.Errorf(`Error message did not match expected. Got: "%v", Expected "%v"`, e.Error(), expected)
+			}
+		},
+	)
+	t.Run(
+		"Default error without body and not unauthorized.",
 		func(t *testing.T) {
 			errorMessage := []byte(`{}`)
 
 			resp := &http.Response{
 				Status:     "400 BadRequest",
 				StatusCode: http.StatusBadRequest,
-				Header: http.Header{
-					"Content-Type": []string{"application/json"},
-				},
 				Body: ioutil.NopCloser(bytes.NewBuffer(errorMessage)),
 			}
 

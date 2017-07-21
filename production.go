@@ -192,5 +192,12 @@ func MakeResponseError(resp *http.Response) error {
 			return APIErr.GetAsError()
 		}
 	}
+
+	// Special check for unauthorized reponse.
+	if resp.StatusCode == http.StatusUnauthorized {
+		return errors.New(fmt.Sprintf(`Unauthorized. Code: "%v"`, resp.StatusCode))
+	}
+
+	// Default
 	return errors.New(fmt.Sprintf(`Response not ok. No information given. Code: "%v"`, resp.StatusCode))
 }
